@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuklidkarte</title>
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Modak" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div style="text-align:center; margin-top: 10px;">
+        <button id="de" onclick="switchLanguage('de')">DE 🇩🇪</button>
+        <button id="en" onclick="switchLanguage('en')">EN 🇬🇧</button>
+    </div>
+<!-- German Content -->
+    <div id="de-content" class="lang-content">
+        <h1>Nuklidkarte</h1>
+        <div class="container">
+            <label for="nuklid">Nuklid eingeben<br> (z.B. U228):</label>
+            <input type="text" id="nuklid" placeholder="Dein Nuklid kommt hier">
+
+            <label for="zerfall">Zerfallstyp wählen:</label>
+            <select id="zerfall">
+                <option value="alpha">Alpha-Zerfall</option>
+                <option value="beta">Beta-Zerfall</option>
+            </select>
+
+            <button onclick="berechneZerfall()">Berechne Zerfall</button>
+
+            <p>Ergebnis: <span id="ergebnis"></span></p>
+        </div>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Nuklidkarte_Segre.svg/880px-Nuklidkarte_Segre.svg.png">
+         <div class="container">
+ <p>Was ist eine Alpha-Zerfall?</p>
+ <p>Ein Alphateilchen, bestehend aus 2 Protonen und 2 Neutronen, wird aus dem Atomkern ausgestoßen. Dies führt zu einer Verringerung der Atommasse und Atomzahl.</p>
+    </div>
+    <div class="container">
+    <p>Was ist eine Beta-Zerfall?</p>
+        <p>Ein Neutron im Kern wird in ein Proton, ein Elektron und ein Antineutrino umgewandelt. Das Elektron wird aus dem Kern ausgestoßen, wodurch die Atomzahl um 1 erhöht wird.</p>
+    </div>
+    </div>
+<!-- English Content -->
+    <div id="en-content" class="lang-content" style="display:none;">
+        <h1>Nuclide Chart</h1>
+        <div class="container">
+            <label for="nuklid-en">Enter nuclide<br> (e.g. U228):</label>
+            <input type="text" id="nuklid-en" placeholder="Add your Nuclide here">
+
+            <label for="zerfall-en">Choose decay type:</label>
+            <select id="zerfall-en">
+                <option value="alpha">Alpha Decay</option>
+                <option value="beta">Beta Decay</option>
+            </select>
+
+            <button onclick="berechneZerfallEn()">Calculate Decay</button>
+
+            <p>Result: <span id="ergebnis-en"></span></p>
+        </div>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/NuclideMap_stitched.png/1376px-NuclideMap_stitched.png">
+        <div class="container">
+        <p>What is a Alpha Decay</p>
+            <p>In alpha decay, an alpha particle, consisting of 2 protons and 2 neutrons, is ejected from the atomic nucleus. This leads to a decrease in atomic mass and atomic number.</p>
+        </div>
+        <div class="container">
+        <p>What is a Beta Decay?</p>
+            <p>A neutron in the nucleus is converted into a proton, an electron, and an antineutrino. The electron is ejected from the nucleus, increasing the atomic number by 1.</p>
+        </div>
+    </div>
+   <p id="p">&copy All rights reserved<br>
+  30.Sept.2023<br>Made by Faraz Haghbayan</p>
+  <style>
+      .container {
+    width: 250px;
+    margin: 40px auto;
+    font-family:'Georgia',serif;
+    font-weight:bold;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    padding: 35px;
+    background-color:white;
+    border-radius:10%;
+}
+img{
+    width:80%;
+    border-radius:10%;
+    margin:10%;
+}
+#p{
+    font-family:Lobster;
+    color:white;
+    text-align:center ;
+}
+#de,#en{
+    margin-bottom:1%;
+    display:inline;
+}
+#zerfall-en{
+     margin-top:7%;
+    margin-bottom:5%;
+     box-shadow: -8px -8px 15px rgba(255, 255, 255, 0.1),5px 5px 15px rgba(0, 0, 0, 0.2);
+       background-color:#2c3847;
+     color:white;
+     border:none;
+     padding:10px 20px;
+     cursor:pointer;
+     transition:box-shadow 0.7s ease;
+}
+h1{
+    text-align:center ;
+    color:cyan;
+    margin-top:10%;
+     font-family:Lobster;
+     font-size:30px;
+}
+input{
+    margin-top:5%;
+    margin-bottom:5%;
+    transition: box-shadow 0.5s ease;
+    font-family:"Georgia",serif;
+}
+input:focus {
+    outline: none;  /* entfernt den standardmäßigen Browser-Umrandungseffekt */
+    box-shadow: 0 0 10px black;  /* Neuer Code */
+}
+button {
+    display: block;
+    margin-top: 10px;
+    margin-bottom:10%;
+     box-shadow: -8px -8px 15px rgba(255, 255, 255, 0.1),5px 5px 15px rgba(0, 0, 0, 0.2);
+}
+#zerfall{
+    margin-top:7%;
+    margin-bottom:5%;
+     box-shadow: -8px -8px 15px rgba(255, 255, 255, 0.1),5px 5px 15px rgba(0, 0, 0, 0.2);
+}
+button,#zerfall{
+    background-color:#2c3847;
+     color:white;
+     border:none;
+     padding:10px 20px;
+     cursor:pointer;
+     transition:box-shadow 0.7s ease;
+}
+button:hover{
+    background-color:black;
+     box-shadow: 0 0 10px black; 
+}
+body{
+    background-color:#3a4452;
+}    
+  </style>
+<script>
+        function switchLanguage(lang) {
+            if (lang === 'de') {
+                document.getElementById('de-content').style.display = 'block';
+                document.getElementById('en-content').style.display = 'none';
+            } else {
+                document.getElementById('de-content').style.display = 'none';
+                document.getElementById('en-content').style.display = 'block';
+            }
+        }
+
+        window.onload = function () {
+            alert("Welcome to our website! Here, you can explore how nuclides transform through various decay processes.Pls be aware that till now only few Nuclids are added.Enjoy exploring!😄");
+        };
+        function berechneZerfall() {
+    let nuklid = document.getElementById("nuklid").value;
+    let zerfallstyp = document.getElementById("zerfall").value;
+
+    let ergebnis = "";
+
+    if(zerfallstyp === "alpha") {
+        
+        switch(nuklid) {
+            case "U228":
+                ergebnis = "Th224";
+                break;
+            case "Th232":
+                ergebnis = "Ra228";
+                break;
+            case "Pa216":
+                ergebnis = "Ac212";
+                break;
+            case "Pa217":
+                ergebnis = "Ac213";
+                break;
+            case "Pa218":
+                ergebnis = "Ac214";
+                break;
+            case "Pa222":
+                ergebnis = "Ac218";
+                break;
+            case "U238":
+                ergebnis = "Th234";
+                break;
+            case "U235":
+            ergebnis = "Th231";
+                break;
+            case "Ra226":
+                ergebnis = "Rn222";
+                break;
+            case "Po210":
+                ergebnis = "Pb206";
+                break;
+                case "Th230":
+                ergebnis = "Ra226";
+                break;
+            case "U234":
+                ergebnis = "Th230";
+                break;
+            case "Po218":
+                ergebnis = "Pb214";
+                break;
+            case "Po214":
+                ergebnis = "Pb210";
+                break;
+            case "Rn222":
+                ergebnis = "Po218";
+                break;
+            case "At218":
+                ergebnis = "Bi214";
+                break;
+            case "Fr222":
+                ergebnis = "At218";
+                break;
+                case "Pa231":
+                ergebnis = "Ac227";
+                break;
+            case "Th227":
+                ergebnis = "Ra223";
+                break;
+            case "Ac227":
+                ergebnis = "Th223";
+                break;
+            case "Ra223":
+                ergebnis = "Rn219";
+                break;
+            case "Fr223":
+                ergebnis = "At219";
+                break;
+            case "Rn219":
+                ergebnis = "Po215";
+                break;
+            case "At215":
+                ergebnis = "Bi211";
+                break;
+            case "Po218":
+                ergebnis = "Pb214";
+                break;
+            default:
+                ergebnis = "Leider würde dieses Nuklid noch nicht eingegeben";
+                break;
+        }
+    } else if(zerfallstyp === "beta") {
+        switch (nuklid) {
+            case "Th234":
+                ergebnis = "Pa234";
+                break;
+            case "Pa234":
+                ergebnis = "U234";
+                break;
+            case "Ac213":
+                ergebnis = "Th213";
+                break;
+            default:
+                ergebnis = "Leider wurde dieses Nuklid noch nicht eingegeben.";
+                break;
+    }
+}
+    document.getElementById("ergebnis").innerText = ergebnis;
+}
+
+        function berechneZerfallEn() {
+            let nuklid = document.getElementById("nuklid-en").value;
+            let zerfallstyp = document.getElementById("zerfall-en").value;
+            let ergebnis = "";
+            if (zerfallstyp === "alpha") {
+                
+                switch (nuklid) {
+                    case "U228":
+                ergebnis = "Th224";
+                break;
+            case "Th232":
+                ergebnis = "Ra228";
+                break;
+            case "Pa216":
+                ergebnis = "Ac212";
+                break;
+            case "Pa217":
+                ergebnis = "Ac213";
+                break;
+            case "Pa218":
+                ergebnis = "Ac214";
+                break;
+            case "Pa222":
+                ergebnis = "Ac218";
+                break;
+            case "U238":
+                ergebnis = "Th234";
+                break;
+            case "U235":
+            ergebnis = "Th231";
+                break;
+            case "Ra226":
+                ergebnis = "Rn222";
+                break;
+            case "Po210":
+                ergebnis = "Pb206";
+                break;
+                    
+                    default:
+                        ergebnis = "This nuclide hasn't been added yet.";
+                        break;
+                }
+            } else if (zerfallstyp === "beta") {
+                switch (nuklid) {
+            case "Th234":
+                ergebnis = "Pa234";
+                break;
+            case "Pa234":
+                ergebnis = "U234";
+                break;
+            case "I131":
+                ergebnis = "Xe131";
+                break;
+            default:
+                ergebnis = "Leider wurde dieses Nuklid noch nicht eingegeben.";
+                break;
+            }
+     } document.getElementById("ergebnis-en").innerText = ergebnis;
+        }
+    </script>
+</body>
